@@ -27,7 +27,7 @@ sudo raspi-config
 Install some softwares
 
 ```
-sudo apt-get install screen vim git tmux python3-pip i2c-tools
+sudo apt-get install screen vim git tmux python3-pip i2c-tools libwebp-dev
 git config --global user.name "Your Name"
 git config --global user.email [email address]
 git config --global core.editor 'vim -c "set fenc=utf-8"'

@@ -1,3 +1,5 @@
 pigpio
 pyserial
 smbus2
+picamera
+Pillow

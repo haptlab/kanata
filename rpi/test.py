@@ -7,8 +7,14 @@ import pigpio
 import math
 
 SEA_LEVEL_PRESSURE = 1013.25
+
 PIN_ELEVON_SERVO_RIGHT = 22
 PIN_ELEVON_SERVO_LEFT = 23
+PIN_LED = 4
+PIN_GPS_TX = 18
+
+GPS_BAUDRATE = 19200
+
 DIFF_ELEVON_SERVO_RIGHT = 0
 DIFF_ELEVON_SERVO_LEFT = 14
 
@@ -45,6 +51,24 @@ if __name__ == "__main__":
  
     if not pi.connected:
         exit(0)
+
+    pi.set_mode(PIN_LED, pigpio.OUTPUT)
+
+    pigpio.exceptions = False
+    status = pi.bb_serial_read_close(PIN_GPS_TX)
+    pigpio.exceptions = True
+
+    status = pi.bb_serial_read_open(PIN_GPS_TX, GPS_BAUDRATE)
+    print(status)
+
+    for i in range(10000):
+        (count, data) = pi.bb_serial_read(PIN_GPS_TX)
+        print(count, data)
+        time.sleep(0.01)
+
+    #for i in range(10):
+    #    pi.write(PIN_LED, i % 2)
+    #    time.sleep(1)
 
     for i in range(1):
         set_elevon_servo(0, 0)
